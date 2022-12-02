@@ -181,15 +181,19 @@ const solve = (day, test = false) => {
         .then((mapped) => {
 
             const t1 = moment();
-            solve1(mapped);
+            const r1 = solve1(mapped);
             const t2 = moment();
-            solve2(mapped);
+            const r2 = solve2(mapped);
             const t3 = moment();
 
             const d1 = t2 - t1;
             const d2 = t3 - t2;
 
-            console.info(`Durations: ${d1} and ${d2} `)
+            console.info(r1);
+            console.info(`${d1}ms`);
+
+            console.info(r2);
+            console.info(`${d2}ms`);
         })
         .catch((e) => {
             console.error(`Something went wrong trying to solve the puzzles for day ${day}`)

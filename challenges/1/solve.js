@@ -7,7 +7,7 @@ module.exports = {
         var elf = [];
         for (var line of input.split("\n")) {
             if (line != "")
-                elf.push(line)
+                elf.push(parseInt(line))
             else {
                 mapped.push(elf)
                 elf = []
@@ -19,7 +19,7 @@ module.exports = {
     solve1: (input) => {
         const summed = input.map(elf => { return elf.reduce(sum, 0) })
         const max = Math.max(...summed)
-        console.info(max)
+        return max;
     },
 
     solve2: (input) => {
@@ -27,7 +27,7 @@ module.exports = {
         const sorted = summed.sort(sortDesc)
         const top3 = sorted.slice(0, 3)
         const total = top3.reduce(sum, 0)
-        console.info(total)
+        return total;
     },
 
 }
