@@ -55,6 +55,11 @@ const parseArgs = () => {
             case "inspect":
                 parsed.mode = "inspect"
                 break
+            case "-u":
+            case "--update":
+            case "update":
+                parsed.mode = "update"
+                break;
             default:
                 if (!parsed.day)
                     parsed.day = parseInt(arg)
@@ -107,6 +112,13 @@ const getDailyInput = (day) => {
                     return fs.writeFile(fullPath, data)
                 })
         })
+}
+
+const update = (day) => {
+    return getDailyChallenge(day)
+        .then(() => {
+            console.info(`Daily challenge info updated for day ${day}`)
+        });
 }
 
 const fetch = (day) => {
@@ -205,4 +217,8 @@ switch (args.mode) {
     case "solve":
         solve(args.day, args.test)
         break
+
+    case "update":
+        update(args.day);
+        break;
 }
