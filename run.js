@@ -5,7 +5,7 @@ const axios = require("axios");
 const { loadInput } = require('./utils');
 const JSSoup = require("jssoup").default;
 const moment = require("moment");
-const { parse } = require('path');
+const { NodeHtmlMarkdown } = require("node-html-markdown");
 
 const COOKIE = "session=53616c7465645f5f877ea57653456e0dfb4d8ca5179bdb4e9e95a30661e976ff8ef3556dd34dd0194d9c4b150b065fd77037f27cfea33e9bc347923acef558ab"
 
@@ -26,15 +26,20 @@ const getDailyChallenge = (day) => {
             return html
         })
         .then((html) => {
-            const fullPath = path.join("challenges", `${day}`, "challenge.html");
-            return mkdirp(path.dirname(fullPath))
+            const htmlPath = path.join("challenges", `${day}`, "challenge.html");
+            const markdownPath = path.join("challenges", `${day}`, "challenge.md");
+            return mkdirp(path.dirname(htmlPath))
                 .then(() => {
-                    return fs.writeFile(fullPath, html)
+                    return Promise.all([
+                        fs.writeFile(htmlPath, html),
+                        fs.writeFile(markdownPath, NodeHtmlMarkdown.translate(html)),
+                    ]);
+                })
+                .then(() => {
+                    console.info("Saved challenge document to HTML and markdown")
                 });
         })
-        .then((writeFileResult) => {
-            console.debug('writeFileResult', writeFileResult);
-        })
+
 }
 
 const getDailyInput = (day) => {
