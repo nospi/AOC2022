@@ -1,23 +1,16 @@
 module.exports = {
 
     mapInput: (input) => {
-        return input;
+        const lines = input.split("/n");
+        return lines;
     },
 
     solve1: (input) => {
-        var result;
-
-
-
-        console.info(result)
+        return;
     },
 
     solve2: (input) => {
-        var result;
-
-
-
-        console.info(result)
+        return;
     },
 
 }
