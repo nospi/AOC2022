@@ -1,7 +1,7 @@
 module.exports = {
 
     mapInput: (input) => {
-        const lines = input.split("/n");
+        const lines = input.split("\n");
         return lines;
     },
 

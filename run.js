@@ -183,9 +183,9 @@ const solve = (day, test) => {
             .then((mapped) => {
 
                 const t1 = moment()
-                const r1 = solve1(mapped)
+                const r1 = solve1(JSON.parse(JSON.stringify(mapped)))
                 const t2 = moment()
-                const r2 = solve2(mapped)
+                const r2 = solve2(JSON.parse(JSON.stringify(mapped)))
                 const t3 = moment()
 
                 const d1 = t2 - t1
