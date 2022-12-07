@@ -66,12 +66,9 @@ module.exports = {
 
     solve1: (input) => {
         return Object.keys(input)
-            .map(path => ({
-                path,
-                size: size(path, input),
-            }))
-            .filter((res) => res.size <= 100000)
-            .reduce((p, c) => p + c.size, 0)
+            .map(path => size(path, input))
+            .filter((size) => size <= 100000)
+            .reduce((p, c) => p + c, 0)
     },
 
     solve2: (input) => {
@@ -79,12 +76,9 @@ module.exports = {
         const UNUSED_TARGET = 30000000;
         const FREE_SPACE = TOTAL_DISK_SPACE - size("/", input);
         return Object.keys(input)
-            .map(path => ({
-                path,
-                size: size(path, input),
-            }))
-            .filter((res) => res.size >= UNUSED_TARGET - FREE_SPACE)
-            .sort((a, b) => a.size - b.size)[0].size
+            .map(path => size(path, input))
+            .filter((size) => size >= UNUSED_TARGET - FREE_SPACE)
+            .sort((a, b) => a - b)[0]
     },
 
 }
