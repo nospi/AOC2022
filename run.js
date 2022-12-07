@@ -7,6 +7,7 @@ const JSSoup = require("jssoup").default
 const moment = require("moment")
 const { NodeHtmlMarkdown } = require("node-html-markdown")
 
+require("dotenv").config()
 const COOKIE = `session=${process.env.SESSION}`
 
 const REQUEST_OPTS = {
