@@ -60,17 +60,18 @@ module.exports = {
                     break;
             }
         }
-        return tree;
-    },
 
-    solve1: (input) => {
-        return Object.keys(input)
+        return Object.keys(tree)
             .map(path => {
                 return {
                     path,
                     size: size(path, input),
                 }
             })
+    },
+
+    solve1: (input) => {
+        return input
             .filter((res) => res.size <= 100000)
             .reduce((p, c) => p + c.size, 0)
     },
@@ -79,16 +80,8 @@ module.exports = {
         const TOTAL_DISK_SPACE = 70000000;
         const UNUSED_TARGET = 30000000;
         const FREE_SPACE = TOTAL_DISK_SPACE - size("/", input);
-        return Object.keys(input)
-            .map(path => {
-                return {
-                    path,
-                    size: size(path, input),
-                }
-            })
-            // only return directories large enough to meet the target
+        return input
             .filter((res) => res.size >= UNUSED_TARGET - FREE_SPACE)
-            // sort from smallest to biggest and return the size of the first
             .sort((a, b) => a.size - b.size)[0].size
     },
 
