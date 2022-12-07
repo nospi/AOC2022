@@ -2,7 +2,6 @@ const fs = require('fs').promises
 const mkdirp = require('mkdirp')
 const path = require("path")
 const axios = require("axios")
-const { loadInput } = require('./utils')
 const JSSoup = require("jssoup").default
 const moment = require("moment")
 const { NodeHtmlMarkdown } = require("node-html-markdown")
@@ -161,6 +160,10 @@ const fetch = (day) => {
             console.error(`Something went wrong trying to fetch data for day ${day}`)
             if (args.verbose) console.debug(e)
         })
+}
+
+const loadInput = (day, test) => {
+    return fs.readFile(path.join("challenges", `${day}`, test ? "test.txt" : "input.txt"), "utf-8")
 }
 
 const inspect = (day) => {
