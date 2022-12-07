@@ -7,7 +7,7 @@ const JSSoup = require("jssoup").default
 const moment = require("moment")
 const { NodeHtmlMarkdown } = require("node-html-markdown")
 
-const COOKIE = "session=53616c7465645f5f877ea57653456e0dfb4d8ca5179bdb4e9e95a30661e976ff8ef3556dd34dd0194d9c4b150b065fd77037f27cfea33e9bc347923acef558ab"
+const COOKIE = `session=${process.env.SESSION}`
 
 const REQUEST_OPTS = {
     headers: {
