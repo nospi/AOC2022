@@ -61,17 +61,15 @@ module.exports = {
             }
         }
 
-        return Object.keys(tree)
-            .map(path => {
-                return {
-                    path,
-                    size: size(path, input),
-                }
-            })
+        return tree;
     },
 
     solve1: (input) => {
-        return input
+        return Object.keys(input)
+            .map(path => ({
+                path,
+                size: size(path, input),
+            }))
             .filter((res) => res.size <= 100000)
             .reduce((p, c) => p + c.size, 0)
     },
@@ -80,7 +78,11 @@ module.exports = {
         const TOTAL_DISK_SPACE = 70000000;
         const UNUSED_TARGET = 30000000;
         const FREE_SPACE = TOTAL_DISK_SPACE - size("/", input);
-        return input
+        return Object.keys(input)
+            .map(path => ({
+                path,
+                size: size(path, input),
+            }))
             .filter((res) => res.size >= UNUSED_TARGET - FREE_SPACE)
             .sort((a, b) => a.size - b.size)[0].size
     },
